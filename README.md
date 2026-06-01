@@ -15,8 +15,8 @@ Install it, choose a preset, and get a solid default ruleset for JavaScript, Typ
 ## Why use it
 
 - One package with reusable configuration presets
-- Ready for ESLint flat config
-- Shared baseline for JS, TS, test and security rules
+- Ready for ESLint flat configuration
+- Best Practices in JavaScript, TypeScript and security
 - Easy to extend with your own rules on top
 
 ## Requirements
@@ -56,6 +56,7 @@ These are the presets currently available on the package:
 - `multistack.configs.next` for Next projects
 - `multistack.configs.angular` for Angular projects
 - `multistack.configs.express` for Express and Node backends
+- `multistack.configs.tsLibrary` for TypeScript library projects
 
 Example:
 
@@ -81,7 +82,7 @@ Every preset already bundles rules for:
 
 ## Customize it
 
-You can append your own config after the preset to override any rule.
+You can append your own configuration after the preset to override any rule.
 
 ```js
 import multistack from '@gitopslovers/eslint-config-multistack';

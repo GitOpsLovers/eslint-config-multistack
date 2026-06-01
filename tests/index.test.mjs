@@ -25,18 +25,18 @@ describe('eslint-config-multistack', () => {
   });
 
   test.each(['angular', 'react', 'express'])(
-    'flat config "%s" is an array and includes dictator in plugins object',
+    'flat config "%s" is an array and includes multistack in plugins object',
     (preset) => {
       expect(Array.isArray(plugin.configs[preset])).toBe(true);
       expect(plugin.configs[preset][0].plugins).toBeDefined();
-      expect(plugin.configs[preset][0].plugins.dictator).toBe(plugin);
+      expect(plugin.configs[preset][0].plugins.multistack).toBe(plugin);
     },
   );
 
   test.each(['angular', 'react', 'express'])(
     'config "%s" has a name field',
     (preset) => {
-      expect(plugin.configs[preset][0].name).toBe(`dictator/${preset}`);
+      expect(plugin.configs[preset][0].name).toBe(`multistack/${preset}`);
     },
   );
 
