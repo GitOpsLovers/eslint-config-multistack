@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/GitOpsLovers/eslint-config-multistack/compare/v1.5.0...v1.6.0) (2026-06-01)
+
+
+### Features
+
+* add pure TS library preset ([#9](https://github.com/GitOpsLovers/eslint-config-multistack/issues/9)) ([bf19d00](https://github.com/GitOpsLovers/eslint-config-multistack/commit/bf19d008b804a72184595aa023615315770253e7))
+
 # [1.5.0](https://github.com/GitOpsLovers/eslint-config-multistack/compare/v1.4.0...v1.5.0) (2026-05-24)
 
 
