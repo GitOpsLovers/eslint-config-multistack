@@ -88,7 +88,7 @@ pnpm exec eslint .
 
 ## Project layout
 
-- `index.mjs` — Plugin entry point. Exports `configs.angular`, `configs.react`, `configs.express` and the `flatConfigs` alias.
+- `index.mjs` — Plugin entry point. Exports `configs.angular`, `configs.react`, `configs.express`, `configs.next` and `configs.tsLibrary`.
 - `lib/configs/` — Shared flat-config layers (`base`, `jsdoc`, `prefer-arrow`, `regex`, `security`, `typescript`) used by every preset.
 - `lib/presets/` — Framework presets that compose the shared layers and add framework-specific rules.
 - `tests/` — Vitest tests for the entry point, every shared config and every preset.

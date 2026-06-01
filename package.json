@@ -13,7 +13,8 @@
     "angular",
     "react",
     "next",
-    "express"
+    "express",
+    "typescript"
   ],
   "homepage": "https://github.com/GitOpsLovers/eslint-config-multistack#readme",
   "bugs": {
