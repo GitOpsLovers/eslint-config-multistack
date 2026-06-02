@@ -1,3 +1,10 @@
+## [1.6.1](https://github.com/GitOpsLovers/eslint-config-multistack/compare/v1.6.0...v1.6.1) (2026-06-02)
+
+
+### Bug Fixes
+
+* error on AudioWorkletGlobalScope from Globals package ([#11](https://github.com/GitOpsLovers/eslint-config-multistack/issues/11)) ([550c979](https://github.com/GitOpsLovers/eslint-config-multistack/commit/550c9797ccc3ca3cce1ee54224485e072427308f))
+
 # [1.6.0](https://github.com/GitOpsLovers/eslint-config-multistack/compare/v1.5.0...v1.6.0) (2026-06-01)
 
 
