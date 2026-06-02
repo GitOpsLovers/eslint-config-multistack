@@ -12,6 +12,14 @@ describe('next config', () => {
     expect(preset.languageOptions.globals.window).toBeDefined();
   });
 
+  test('does not have leading or trailing whitespaces in globals keys', () => {
+    const globalKeys = Object.keys(preset.languageOptions.globals);
+
+    globalKeys.forEach((key) => {
+      expect(key).toBe(key.trim());
+    });
+  });
+
   test('enables JSX in languageOptions', () => {
     expect(preset.languageOptions.parserOptions.ecmaFeatures.jsx).toBe(true);
   });
