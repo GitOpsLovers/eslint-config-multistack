@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/GitOpsLovers/eslint-config-multistack/compare/v1.6.1...v1.7.0) (2026-06-03)
+
+
+### Features
+
+* add test configurations for multiple test frameworks ([#13](https://github.com/GitOpsLovers/eslint-config-multistack/issues/13)) ([a2d2899](https://github.com/GitOpsLovers/eslint-config-multistack/commit/a2d2899f98f49fd1dbba277ab37b7095d402ba04))
+
 ## [1.6.1](https://github.com/GitOpsLovers/eslint-config-multistack/compare/v1.6.0...v1.6.1) (2026-06-02)
 
 
