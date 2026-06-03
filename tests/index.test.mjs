@@ -130,4 +130,54 @@ describe('eslint-config-multistack', () => {
       expect(rtlEntry).toBeUndefined();
     },
   );
+
+  test('tsLibrary config is a function', () => {
+    expect(typeof plugin.configs.tsLibrary).toBe('function');
+  });
+
+  test('tsLibrary() without options returns an array with vitest config', () => {
+    const config = plugin.configs.tsLibrary();
+    expect(Array.isArray(config)).toBe(true);
+    const vitestEntry = config.find((entry) => entry.plugins?.vitest);
+    expect(vitestEntry).toBeDefined();
+    expect(vitestEntry.rules['vitest/no-focused-tests']).toBe('error');
+  });
+
+  test('tsLibrary({ testRunner: "vitest" }) includes vitest config', () => {
+    const config = plugin.configs.tsLibrary({ testRunner: 'vitest' });
+    const vitestEntry = config.find((entry) => entry.plugins?.vitest);
+    expect(vitestEntry).toBeDefined();
+    expect(vitestEntry.rules['vitest/no-focused-tests']).toBe('error');
+  });
+
+  test('tsLibrary({ testRunner: "jest" }) includes jest config', () => {
+    const config = plugin.configs.tsLibrary({ testRunner: 'jest' });
+    const jestEntry = config.find((entry) => entry.plugins?.jest);
+    expect(jestEntry).toBeDefined();
+    expect(jestEntry.rules['jest/no-focused-tests']).toBe('error');
+  });
+
+  test('tsLibrary({ testRunner: "jest" }) does not include vitest config', () => {
+    const config = plugin.configs.tsLibrary({ testRunner: 'jest' });
+    const vitestEntry = config.find((entry) => entry.plugins?.vitest);
+    expect(vitestEntry).toBeUndefined();
+  });
+
+  test('tsLibrary({ testRunner: "vitest" }) does not include jest config', () => {
+    const config = plugin.configs.tsLibrary({ testRunner: 'vitest' });
+    const jestEntry = config.find((entry) => entry.plugins?.jest);
+    expect(jestEntry).toBeUndefined();
+  });
+
+  test('tsLibrary() result has name and multistack plugin in first entry', () => {
+    const config = plugin.configs.tsLibrary();
+    expect(config[0].name).toBe('multistack/ts-library');
+    expect(config[0].plugins.multistack).toBe(plugin);
+  });
+
+  test('tsLibrary() with unknown testRunner throws an error', () => {
+    expect(() => plugin.configs.tsLibrary({ testRunner: 'mocha' })).toThrow(
+      '[eslint-config-multistack] Unknown testRunner "mocha"',
+    );
+  });
 });
