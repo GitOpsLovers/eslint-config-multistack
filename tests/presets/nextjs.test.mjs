@@ -1,7 +1,8 @@
 import { describe, expect, test } from 'vitest';
 
-import config from '../../lib/presets/next.mjs';
+import createConfig from '../../lib/presets/next.mjs';
 
+const config = createConfig();
 const preset = config.at(-1);
 const importsEntry = config.find((entry) => entry.plugins?.import && entry.plugins?.['unused-imports']);
 const nextEntry = config.find((entry) => entry.plugins?.['@next/next']);
@@ -71,5 +72,19 @@ describe('next config', () => {
     expect(ignoresEntry.ignores).toContain('dist/');
     expect(ignoresEntry.ignores).toContain('coverage/');
     expect(ignoresEntry.ignores).toContain('.turbo/');
+  });
+
+  describe('with tsConfig option', () => {
+    const customConfig = createConfig({ tsConfig: 'tsconfig.custom.json' });
+
+    test('passes tsConfig to typescript config', () => {
+      const tsEntry = customConfig.find((entry) => entry.plugins?.['@typescript-eslint']);
+      expect(tsEntry.languageOptions.parserOptions).toEqual({ project: ['tsconfig.custom.json'] });
+    });
+
+    test('passes tsConfig to imports config', () => {
+      const iEntry = customConfig.find((entry) => entry.plugins?.import);
+      expect(iEntry.settings['import-x/resolver'].typescript.project).toContain('tsconfig.custom.json');
+    });
   });
 });

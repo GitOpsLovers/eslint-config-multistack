@@ -104,4 +104,32 @@ describe('typescript library config', () => {
       expect(vitestEntry).toBeUndefined();
     });
   });
+
+  describe('with tsConfig option', () => {
+    const config = createConfig({ tsConfig: 'tsconfig.app.json' });
+    const { importsEntry } = getEntries(config);
+
+    test('passes tsConfig to typescript config', () => {
+      const tsEntry = config.find((entry) => entry.plugins?.['@typescript-eslint']);
+      expect(tsEntry.languageOptions.parserOptions).toEqual({ project: ['tsconfig.app.json'] });
+    });
+
+    test('passes tsConfig to imports config', () => {
+      expect(importsEntry.settings['import-x/resolver'].typescript.project).toContain('tsconfig.app.json');
+    });
+  });
+
+  describe('with both tsConfig and testRunner', () => {
+    const config = createConfig({ tsConfig: 'tsconfig.jest.json', testRunner: 'jest' });
+
+    test('includes jest plugin', () => {
+      const jestEntry = config.find((entry) => entry.plugins?.jest);
+      expect(jestEntry).toBeDefined();
+    });
+
+    test('uses custom tsConfig in typescript config', () => {
+      const tsEntry = config.find((entry) => entry.plugins?.['@typescript-eslint']);
+      expect(tsEntry.languageOptions.parserOptions).toEqual({ project: ['tsconfig.jest.json'] });
+    });
+  });
 });

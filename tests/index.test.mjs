@@ -25,33 +25,44 @@ describe('eslint-config-multistack', () => {
   });
 
   test.each(['angular', 'react', 'express'])(
-    'flat config "%s" is an array and includes multistack in plugins object',
+    'flat config constructors are functions',
     (preset) => {
-      expect(Array.isArray(plugin.configs[preset])).toBe(true);
-      expect(plugin.configs[preset][0].plugins).toBeDefined();
-      expect(plugin.configs[preset][0].plugins.multistack).toBe(plugin);
+      expect(typeof plugin.configs[preset]).toBe('function');
+    },
+  );
+
+  test.each(['angular', 'react', 'express'])(
+    'flat config "%s" returns an array and includes multistack in plugins object',
+    (preset) => {
+      const cfg = plugin.configs[preset]();
+      expect(Array.isArray(cfg)).toBe(true);
+      expect(cfg[0].plugins).toBeDefined();
+      expect(cfg[0].plugins.multistack).toBe(plugin);
     },
   );
 
   test.each(['angular', 'react', 'express'])(
     'config "%s" has a name field',
     (preset) => {
-      expect(plugin.configs[preset][0].name).toBe(`multistack/${preset}`);
+      const cfg = plugin.configs[preset]();
+      expect(cfg[0].name).toBe(`multistack/${preset}`);
     },
   );
 
   test.each(['angular', 'react', 'express'])(
     'config "%s" has a rules object',
     (preset) => {
-      expect(plugin.configs[preset].at(-1).rules).toBeDefined();
-      expect(typeof plugin.configs[preset].at(-1).rules).toBe('object');
+      const cfg = plugin.configs[preset]();
+      expect(cfg.at(-1).rules).toBeDefined();
+      expect(typeof cfg.at(-1).rules).toBe('object');
     },
   );
 
   test.each(['angular', 'react', 'express'])(
     'config "%s" includes jsdoc plugin config',
     (preset) => {
-      const jsdocEntry = plugin.configs[preset].find((entry) => entry.plugins?.jsdoc);
+      const cfg = plugin.configs[preset]();
+      const jsdocEntry = cfg.find((entry) => entry.plugins?.jsdoc);
       expect(jsdocEntry).toBeDefined();
       expect(jsdocEntry.rules['jsdoc/no-types']).toBe('error');
     },
@@ -60,7 +71,8 @@ describe('eslint-config-multistack', () => {
   test.each(['angular', 'react', 'express'])(
     'config "%s" includes prefer-arrow plugin config',
     (preset) => {
-      const preferArrowEntry = plugin.configs[preset].find((entry) => entry.plugins?.['prefer-arrow']);
+      const cfg = plugin.configs[preset]();
+      const preferArrowEntry = cfg.find((entry) => entry.plugins?.['prefer-arrow']);
       expect(preferArrowEntry).toBeDefined();
       expect(preferArrowEntry.rules['prefer-arrow/prefer-arrow-functions']).toBeDefined();
     },
@@ -69,7 +81,8 @@ describe('eslint-config-multistack', () => {
   test.each(['angular', 'react', 'express'])(
     'config "%s" includes optimize-regex plugin config',
     (preset) => {
-      const regexEntry = plugin.configs[preset].find((entry) => entry.plugins?.['optimize-regex']);
+      const cfg = plugin.configs[preset]();
+      const regexEntry = cfg.find((entry) => entry.plugins?.['optimize-regex']);
       expect(regexEntry).toBeDefined();
       expect(regexEntry.rules['optimize-regex/optimize-regex']).toBe('error');
     },
@@ -78,7 +91,8 @@ describe('eslint-config-multistack', () => {
   test.each(['angular', 'react', 'express'])(
     'config "%s" includes security plugin config',
     (preset) => {
-      const securityEntry = plugin.configs[preset].find(
+      const cfg = plugin.configs[preset]();
+      const securityEntry = cfg.find(
         (entry) => entry.plugins?.['no-secrets'] && entry.plugins?.security,
       );
       expect(securityEntry).toBeDefined();
@@ -90,7 +104,8 @@ describe('eslint-config-multistack', () => {
   test.each(['angular', 'react', 'express'])(
     'config "%s" includes typescript plugin config scoped to TS files',
     (preset) => {
-      const typescriptEntry = plugin.configs[preset].find(
+      const cfg = plugin.configs[preset]();
+      const typescriptEntry = cfg.find(
         (entry) => entry.plugins?.['@typescript-eslint'],
       );
       expect(typescriptEntry).toBeDefined();
@@ -102,7 +117,8 @@ describe('eslint-config-multistack', () => {
   test.each(['angular', 'react', 'express'])(
     'config "%s" includes vitest test config scoped to test files',
     (preset) => {
-      const vitestEntry = plugin.configs[preset].find(
+      const cfg = plugin.configs[preset]();
+      const vitestEntry = cfg.find(
         (entry) => entry.plugins?.vitest,
       );
       expect(vitestEntry).toBeDefined();
@@ -112,7 +128,8 @@ describe('eslint-config-multistack', () => {
   );
 
   test('config "react" includes testing-library and jest-dom for test files', () => {
-    const rtlEntry = plugin.configs.react.find(
+    const cfg = plugin.configs.react();
+    const rtlEntry = cfg.find(
       (entry) => entry.plugins?.['testing-library'] && entry.plugins?.['jest-dom'],
     );
     expect(rtlEntry).toBeDefined();
@@ -124,7 +141,8 @@ describe('eslint-config-multistack', () => {
   test.each(['angular', 'express'])(
     'config "%s" does not include the react-tests plugin config',
     (preset) => {
-      const rtlEntry = plugin.configs[preset].find(
+      const cfg = plugin.configs[preset]();
+      const rtlEntry = cfg.find(
         (entry) => entry.plugins?.['testing-library'],
       );
       expect(rtlEntry).toBeUndefined();
@@ -179,5 +197,35 @@ describe('eslint-config-multistack', () => {
     expect(() => plugin.configs.tsLibrary({ testRunner: 'mocha' })).toThrow(
       '[eslint-config-multistack] Unknown testRunner "mocha"',
     );
+  });
+
+  test('angular({ tsConfig }) passes tsConfig to underlying configs', () => {
+    const cfg = plugin.configs.angular({ tsConfig: 'tsconfig.app.json' });
+    const tsEntry = cfg.find((entry) => entry.plugins?.['@typescript-eslint']);
+    expect(tsEntry.languageOptions.parserOptions).toEqual({ project: ['tsconfig.app.json'] });
+  });
+
+  test('react({ tsConfig }) passes tsConfig to underlying configs', () => {
+    const cfg = plugin.configs.react({ tsConfig: 'tsconfig.custom.json' });
+    const tsEntry = cfg.find((entry) => entry.plugins?.['@typescript-eslint']);
+    expect(tsEntry.languageOptions.parserOptions).toEqual({ project: ['tsconfig.custom.json'] });
+  });
+
+  test('next({ tsConfig }) passes tsConfig to underlying configs', () => {
+    const cfg = plugin.configs.next({ tsConfig: 'tsconfig.custom.json' });
+    const tsEntry = cfg.find((entry) => entry.plugins?.['@typescript-eslint']);
+    expect(tsEntry.languageOptions.parserOptions).toEqual({ project: ['tsconfig.custom.json'] });
+  });
+
+  test('express({ tsConfig }) passes tsConfig to underlying configs', () => {
+    const cfg = plugin.configs.express({ tsConfig: 'tsconfig.custom.json' });
+    const tsEntry = cfg.find((entry) => entry.plugins?.['@typescript-eslint']);
+    expect(tsEntry.languageOptions.parserOptions).toEqual({ project: ['tsconfig.custom.json'] });
+  });
+
+  test('tsLibrary({ tsConfig }) passes tsConfig to underlying configs', () => {
+    const cfg = plugin.configs.tsLibrary({ tsConfig: 'tsconfig.custom.json' });
+    const tsEntry = cfg.find((entry) => entry.plugins?.['@typescript-eslint']);
+    expect(tsEntry.languageOptions.parserOptions).toEqual({ project: ['tsconfig.custom.json'] });
   });
 });

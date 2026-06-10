@@ -1,9 +1,9 @@
 import { readFileSync } from 'node:fs';
 
-import angularConfig from './lib/presets/angular.mjs';
-import expressConfig from './lib/presets/express.mjs';
-import reactConfig from './lib/presets/react.mjs';
-import nextConfig from './lib/presets/next.mjs';
+import createAngularConfig from './lib/presets/angular.mjs';
+import createExpressConfig from './lib/presets/express.mjs';
+import createReactConfig from './lib/presets/react.mjs';
+import createNextConfig from './lib/presets/next.mjs';
 import createTsLibraryConfig from './lib/presets/ts-library.mjs';
 
 const packageVersion = JSON.parse(
@@ -20,21 +20,21 @@ const plugin = {
 };
 
 plugin.configs = {
-  angular: [
+  angular: (options) => [
     { name: 'multistack/angular', plugins: { multistack: plugin } },
-    ...angularConfig,
+    ...createAngularConfig(options),
   ],
-  react: [
+  react: (options) => [
     { name: 'multistack/react', plugins: { multistack: plugin } },
-    ...reactConfig,
+    ...createReactConfig(options),
   ],
-  next: [
+  next: (options) => [
     { name: 'multistack/next', plugins: { multistack: plugin } },
-    ...nextConfig,
+    ...createNextConfig(options),
   ],
-  express: [
+  express: (options) => [
     { name: 'multistack/express', plugins: { multistack: plugin } },
-    ...expressConfig,
+    ...createExpressConfig(options),
   ],
   tsLibrary: (options) => [
     { name: 'multistack/ts-library', plugins: { multistack: plugin } },
