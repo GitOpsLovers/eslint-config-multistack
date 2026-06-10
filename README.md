@@ -44,7 +44,7 @@ Create an `eslint.config.mjs` file and spread the preset you want to use.
 import multistack from '@gitopslovers/eslint-config-multistack';
 
 export default [
-  ...multistack.configs.presetName,
+  ...multistack.configs.presetName(),
 ];
 ```
 
@@ -52,11 +52,25 @@ export default [
 
 These are the presets currently available on the package:
 
-- `multistack.configs.react` for React projects
-- `multistack.configs.next` for Next projects
-- `multistack.configs.angular` for Angular projects
-- `multistack.configs.express` for Express and Node backends
-- `multistack.configs.tsLibrary` for TypeScript library projects
+| Preset                                  | Description                 |
+|-----------------------------------------|-----------------------------|
+| `multistack.configs.react()`            | React projects              |
+| `multistack.configs.next()`             | Next projects               |
+| `multistack.configs.angular()`          | Angular projects            |
+| `multistack.configs.express()`          | Express and Node backends   |
+| `multistack.configs.tsLibrary(options)` | TypeScript library projects |
+
+Every preset accepts an optional `options` object with the following keys:
+
+| Option     | Type     | Default           | Description                                    |
+|------------|----------|-------------------|------------------------------------------------|
+| `tsconfig` | `string` | `'tsconfig.json'` | Path to your project's TypeScript config file. |
+
+The `tsLibrary` preset also accepts:
+
+| Option       | Type                 | Default    | Description                 |
+|--------------|----------------------|------------|-----------------------------|
+| `testRunner` | `'vitest' \| 'jest'` | `'vitest'` | Which test framework to use |
 
 Example:
 
@@ -64,7 +78,8 @@ Example:
 import multistack from '@gitopslovers/eslint-config-multistack';
 
 export default [
-  ...multistack.configs.react,
+  ...multistack.configs.tsLibrary({ testRunner: 'jest', tsconfig: 'tsconfig.app.json' }),
+  ...multistack.configs.react({ tsconfig: 'tsconfig.web.json' }),
 ];
 ```
 
@@ -82,13 +97,13 @@ Every preset already bundles rules for:
 
 ## Customize it
 
-You can append your own configuration after the preset to override any rule.
+Append your own configuration after the preset to override any rule.
 
 ```js
 import multistack from '@gitopslovers/eslint-config-multistack';
 
 export default [
-  ...multistack.configs.yourPreset,
+  ...multistack.configs.angular(),
   {
     rules: {
       'no-console': 'off',

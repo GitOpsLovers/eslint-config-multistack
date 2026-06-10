@@ -1,7 +1,8 @@
 import { describe, expect, test } from 'vitest';
 
-import config from '../../lib/presets/angular.mjs';
+import createConfig from '../../lib/presets/angular.mjs';
 
+const config = createConfig();
 const preset = config.at(-1);
 const importsEntry = config.find((entry) => entry.plugins?.import && entry.plugins?.['unused-imports']);
 const ignoresEntry = config.find((entry) => Array.isArray(entry.ignores));
@@ -46,5 +47,19 @@ describe('angular config', () => {
       '.angular/',
       '.turbo/',
     ]);
+  });
+
+  describe('with tsConfig option', () => {
+    const customConfig = createConfig({ tsConfig: 'tsconfig.app.json' });
+
+    test('passes tsConfig to typescript config', () => {
+      const tsEntry = customConfig.find((entry) => entry.plugins?.['@typescript-eslint']);
+      expect(tsEntry.languageOptions.parserOptions).toEqual({ project: ['tsconfig.app.json'] });
+    });
+
+    test('passes tsConfig to imports config', () => {
+      const iEntry = customConfig.find((entry) => entry.plugins?.import);
+      expect(iEntry.settings['import-x/resolver'].typescript.project).toContain('tsconfig.app.json');
+    });
   });
 });
