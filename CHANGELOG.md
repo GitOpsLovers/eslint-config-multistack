@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/GitOpsLovers/eslint-config-multistack/compare/v1.7.0...v1.8.0) (2026-06-10)
+
+
+### Features
+
+* allow users to define the tsconfig.json file in presets ([#18](https://github.com/GitOpsLovers/eslint-config-multistack/issues/18)) ([6c2f3b7](https://github.com/GitOpsLovers/eslint-config-multistack/commit/6c2f3b73c9ebc68c6de26be15f321ad350a4cf34))
+
 # [1.7.0](https://github.com/GitOpsLovers/eslint-config-multistack/compare/v1.6.1...v1.7.0) (2026-06-03)
 
 
