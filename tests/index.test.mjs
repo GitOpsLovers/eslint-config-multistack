@@ -223,6 +223,38 @@ describe('eslint-config-multistack', () => {
     expect(tsEntry.languageOptions.parserOptions).toEqual({ project: ['tsconfig.custom.json'] });
   });
 
+  test('express({ testRunner: "vitest" }) includes vitest config', () => {
+    const config = plugin.configs.express({ testRunner: 'vitest' });
+    const vitestEntry = config.find((entry) => entry.plugins?.vitest);
+    expect(vitestEntry).toBeDefined();
+    expect(vitestEntry.rules['vitest/no-focused-tests']).toBe('error');
+  });
+
+  test('express({ testRunner: "jest" }) includes jest config', () => {
+    const config = plugin.configs.express({ testRunner: 'jest' });
+    const jestEntry = config.find((entry) => entry.plugins?.jest);
+    expect(jestEntry).toBeDefined();
+    expect(jestEntry.rules['jest/no-focused-tests']).toBe('error');
+  });
+
+  test('express({ testRunner: "jest" }) does not include vitest config', () => {
+    const config = plugin.configs.express({ testRunner: 'jest' });
+    const vitestEntry = config.find((entry) => entry.plugins?.vitest);
+    expect(vitestEntry).toBeUndefined();
+  });
+
+  test('express({ testRunner: "vitest" }) does not include jest config', () => {
+    const config = plugin.configs.express({ testRunner: 'vitest' });
+    const jestEntry = config.find((entry) => entry.plugins?.jest);
+    expect(jestEntry).toBeUndefined();
+  });
+
+  test('express() with unknown testRunner throws an error', () => {
+    expect(() => plugin.configs.express({ testRunner: 'mocha' })).toThrow(
+      '[eslint-config-multistack] Unknown testRunner "mocha"',
+    );
+  });
+
   test('tsLibrary({ tsConfig }) passes tsConfig to underlying configs', () => {
     const cfg = plugin.configs.tsLibrary({ tsConfig: 'tsconfig.custom.json' });
     const tsEntry = cfg.find((entry) => entry.plugins?.['@typescript-eslint']);

@@ -66,7 +66,7 @@ Every preset accepts an optional `options` object with the following keys:
 |------------|----------|-------------------|------------------------------------------------|
 | `tsconfig` | `string` | `'tsconfig.json'` | Path to your project's TypeScript config file. |
 
-The `tsLibrary` preset also accepts:
+The `tsLibrary` and `express` presets also accepts:
 
 | Option       | Type                 | Default    | Description                 |
 |--------------|----------------------|------------|-----------------------------|
@@ -92,7 +92,7 @@ Every preset already bundles rules for:
 - Arrow function preference
 - Regex optimization
 - Security and secret detection
-- Vitest on `*.test.*`, `*.spec.*`, `tests/**` and `__tests__/**`
+- Vitest or Jest on `*.test.*`, `*.spec.*`, `tests/**` and `__tests__/**`
 - TypeScript best practices on `*.ts`, `*.tsx`, `*.mts` and `*.cts`
 
 ## Customize it
