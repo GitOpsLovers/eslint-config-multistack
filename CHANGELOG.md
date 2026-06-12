@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/GitOpsLovers/eslint-config-multistack/compare/v1.8.0...v1.9.0) (2026-06-12)
+
+
+### Features
+
+* add test runner option to express preset ([#20](https://github.com/GitOpsLovers/eslint-config-multistack/issues/20)) ([54544be](https://github.com/GitOpsLovers/eslint-config-multistack/commit/54544be63c16b73522b911e2f81cf8987cae4103))
+
 # [1.8.0](https://github.com/GitOpsLovers/eslint-config-multistack/compare/v1.7.0...v1.8.0) (2026-06-10)
 
 
