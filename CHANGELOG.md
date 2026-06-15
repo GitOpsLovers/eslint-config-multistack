@@ -1,3 +1,10 @@
+# [1.10.0](https://github.com/GitOpsLovers/eslint-config-multistack/compare/v1.9.0...v1.10.0) (2026-06-15)
+
+
+### Features
+
+* add NestJS preset ([#21](https://github.com/GitOpsLovers/eslint-config-multistack/issues/21)) ([4a6924f](https://github.com/GitOpsLovers/eslint-config-multistack/commit/4a6924f4ac2a0ffeed087413566c09299eb12feb))
+
 # [1.9.0](https://github.com/GitOpsLovers/eslint-config-multistack/compare/v1.8.0...v1.9.0) (2026-06-12)
 
 
