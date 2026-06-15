@@ -15,23 +15,23 @@ describe('eslint-config-multistack', () => {
   });
 
   test('exports flat configs for all presets', () => {
-    const expected = ['angular', 'react', 'express'];
+    const expected = ['angular', 'react', 'express', 'nestjs'];
     expect(Object.keys(plugin.configs)).toEqual(expect.arrayContaining(expected));
   });
 
   test('keeps flatConfigs alias for backwards compatibility', () => {
-    const expected = ['angular', 'react', 'express'];
+    const expected = ['angular', 'react', 'express', 'nestjs'];
     expect(Object.keys(plugin.flatConfigs)).toEqual(expect.arrayContaining(expected));
   });
 
-  test.each(['angular', 'react', 'express'])(
+  test.each(['angular', 'react', 'express', 'nestjs'])(
     'flat config constructors are functions',
     (preset) => {
       expect(typeof plugin.configs[preset]).toBe('function');
     },
   );
 
-  test.each(['angular', 'react', 'express'])(
+  test.each(['angular', 'react', 'express', 'nestjs'])(
     'flat config "%s" returns an array and includes multistack in plugins object',
     (preset) => {
       const cfg = plugin.configs[preset]();
@@ -41,7 +41,7 @@ describe('eslint-config-multistack', () => {
     },
   );
 
-  test.each(['angular', 'react', 'express'])(
+  test.each(['angular', 'react', 'express', 'nestjs'])(
     'config "%s" has a name field',
     (preset) => {
       const cfg = plugin.configs[preset]();
@@ -49,7 +49,7 @@ describe('eslint-config-multistack', () => {
     },
   );
 
-  test.each(['angular', 'react', 'express'])(
+  test.each(['angular', 'react', 'express', 'nestjs'])(
     'config "%s" has a rules object',
     (preset) => {
       const cfg = plugin.configs[preset]();
@@ -58,7 +58,7 @@ describe('eslint-config-multistack', () => {
     },
   );
 
-  test.each(['angular', 'react', 'express'])(
+  test.each(['angular', 'react', 'express', 'nestjs'])(
     'config "%s" includes jsdoc plugin config',
     (preset) => {
       const cfg = plugin.configs[preset]();
@@ -68,7 +68,7 @@ describe('eslint-config-multistack', () => {
     },
   );
 
-  test.each(['angular', 'react', 'express'])(
+  test.each(['angular', 'react', 'express', 'nestjs'])(
     'config "%s" includes prefer-arrow plugin config',
     (preset) => {
       const cfg = plugin.configs[preset]();
@@ -78,7 +78,7 @@ describe('eslint-config-multistack', () => {
     },
   );
 
-  test.each(['angular', 'react', 'express'])(
+  test.each(['angular', 'react', 'express', 'nestjs'])(
     'config "%s" includes optimize-regex plugin config',
     (preset) => {
       const cfg = plugin.configs[preset]();
@@ -88,7 +88,7 @@ describe('eslint-config-multistack', () => {
     },
   );
 
-  test.each(['angular', 'react', 'express'])(
+  test.each(['angular', 'react', 'express', 'nestjs'])(
     'config "%s" includes security plugin config',
     (preset) => {
       const cfg = plugin.configs[preset]();
@@ -101,7 +101,7 @@ describe('eslint-config-multistack', () => {
     },
   );
 
-  test.each(['angular', 'react', 'express'])(
+  test.each(['angular', 'react', 'express', 'nestjs'])(
     'config "%s" includes typescript plugin config scoped to TS files',
     (preset) => {
       const cfg = plugin.configs[preset]();
@@ -138,7 +138,7 @@ describe('eslint-config-multistack', () => {
     expect(ruleKeys.some((key) => key.startsWith('jest-dom/'))).toBe(true);
   });
 
-  test.each(['angular', 'express'])(
+  test.each(['angular', 'express', 'nestjs'])(
     'config "%s" does not include the react-tests plugin config',
     (preset) => {
       const cfg = plugin.configs[preset]();
@@ -259,5 +259,73 @@ describe('eslint-config-multistack', () => {
     const cfg = plugin.configs.tsLibrary({ tsConfig: 'tsconfig.custom.json' });
     const tsEntry = cfg.find((entry) => entry.plugins?.['@typescript-eslint']);
     expect(tsEntry.languageOptions.parserOptions).toEqual({ project: ['tsconfig.custom.json'] });
+  });
+
+  test('nestjs config is a function', () => {
+    expect(typeof plugin.configs.nestjs).toBe('function');
+  });
+
+  test('nestjs() without options returns an array with jest config (default)', () => {
+    const config = plugin.configs.nestjs();
+    expect(Array.isArray(config)).toBe(true);
+    const jestEntry = config.find((entry) => entry.plugins?.jest);
+    expect(jestEntry).toBeDefined();
+    expect(jestEntry.rules['jest/no-focused-tests']).toBe('error');
+  });
+
+  test('nestjs() without options does not include vitest config', () => {
+    const config = plugin.configs.nestjs();
+    const vitestEntry = config.find((entry) => entry.plugins?.vitest);
+    expect(vitestEntry).toBeUndefined();
+  });
+
+  test('nestjs({ testRunner: "vitest" }) includes vitest config', () => {
+    const config = plugin.configs.nestjs({ testRunner: 'vitest' });
+    const vitestEntry = config.find((entry) => entry.plugins?.vitest);
+    expect(vitestEntry).toBeDefined();
+    expect(vitestEntry.rules['vitest/no-focused-tests']).toBe('error');
+  });
+
+  test('nestjs({ testRunner: "jest" }) includes jest config', () => {
+    const config = plugin.configs.nestjs({ testRunner: 'jest' });
+    const jestEntry = config.find((entry) => entry.plugins?.jest);
+    expect(jestEntry).toBeDefined();
+    expect(jestEntry.rules['jest/no-focused-tests']).toBe('error');
+  });
+
+  test('nestjs({ testRunner: "vitest" }) does not include jest config', () => {
+    const config = plugin.configs.nestjs({ testRunner: 'vitest' });
+    const jestEntry = config.find((entry) => entry.plugins?.jest);
+    expect(jestEntry).toBeUndefined();
+  });
+
+  test('nestjs({ testRunner: "jest" }) does not include vitest config', () => {
+    const config = plugin.configs.nestjs({ testRunner: 'jest' });
+    const vitestEntry = config.find((entry) => entry.plugins?.vitest);
+    expect(vitestEntry).toBeUndefined();
+  });
+
+  test('nestjs() result has name and multistack plugin in first entry', () => {
+    const config = plugin.configs.nestjs();
+    expect(config[0].name).toBe('multistack/nestjs');
+    expect(config[0].plugins.multistack).toBe(plugin);
+  });
+
+  test('nestjs() with unknown testRunner throws an error', () => {
+    expect(() => plugin.configs.nestjs({ testRunner: 'mocha' })).toThrow(
+      '[eslint-config-multistack] Unknown testRunner "mocha"',
+    );
+  });
+
+  test('nestjs({ tsConfig }) passes tsConfig to underlying configs', () => {
+    const cfg = plugin.configs.nestjs({ tsConfig: 'tsconfig.custom.json' });
+    const tsEntry = cfg.find((entry) => entry.plugins?.['@typescript-eslint']);
+    expect(tsEntry.languageOptions.parserOptions).toEqual({ project: ['tsconfig.custom.json'] });
+  });
+
+  test('nestjs() uses commonjs sourceType', () => {
+    const cfg = plugin.configs.nestjs();
+    const presetEntry = cfg.findLast((entry) => entry.languageOptions?.sourceType);
+    expect(presetEntry.languageOptions.sourceType).toBe('commonjs');
   });
 });

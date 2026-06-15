@@ -11,6 +11,7 @@ Install it, choose a preset, and get a solid default ruleset for JavaScript, Typ
 ![Angular](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white)
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)
 ![Express.js](https://img.shields.io/badge/Express.js-ffffff?style=for-the-badge&logo=express&logoColor=black)
+![NestJS](https://img.shields.io/badge/NestJS-E0234E?style=for-the-badge&logo=nestjs&logoColor=white)
 
 ## Why use it
 
@@ -58,6 +59,7 @@ These are the presets currently available on the package:
 | `multistack.configs.next()`             | Next projects               |
 | `multistack.configs.angular()`          | Angular projects            |
 | `multistack.configs.express()`          | Express and Node backends   |
+| `multistack.configs.nestjs()`           | NestJS backends             |
 | `multistack.configs.tsLibrary(options)` | TypeScript library projects |
 
 Every preset accepts an optional `options` object with the following keys:
@@ -66,7 +68,7 @@ Every preset accepts an optional `options` object with the following keys:
 |------------|----------|-------------------|------------------------------------------------|
 | `tsconfig` | `string` | `'tsconfig.json'` | Path to your project's TypeScript config file. |
 
-The `tsLibrary` and `express` presets also accepts:
+The `tsLibrary`, `express` and `nestjs` presets also accepts:
 
 | Option       | Type                 | Default    | Description                 |
 |--------------|----------------------|------------|-----------------------------|

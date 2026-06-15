@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs';
 
 import createAngularConfig from './lib/presets/angular.mjs';
 import createExpressConfig from './lib/presets/express.mjs';
+import createNestjsConfig from './lib/presets/nestjs.mjs';
 import createReactConfig from './lib/presets/react.mjs';
 import createNextConfig from './lib/presets/next.mjs';
 import createTsLibraryConfig from './lib/presets/ts-library.mjs';
@@ -35,6 +36,10 @@ plugin.configs = {
   express: (options) => [
     { name: 'multistack/express', plugins: { multistack: plugin } },
     ...createExpressConfig(options),
+  ],
+  nestjs: (options) => [
+    { name: 'multistack/nestjs', plugins: { multistack: plugin } },
+    ...createNestjsConfig(options),
   ],
   tsLibrary: (options) => [
     { name: 'multistack/ts-library', plugins: { multistack: plugin } },
