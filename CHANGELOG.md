@@ -1,3 +1,10 @@
+# [1.11.0](https://github.com/GitOpsLovers/eslint-config-multistack/compare/v1.10.0...v1.11.0) (2026-06-18)
+
+
+### Features
+
+* change eslint-plugin-jest-dom for eslint-plugin-jest-dom-ya ([#22](https://github.com/GitOpsLovers/eslint-config-multistack/issues/22)) ([383f87c](https://github.com/GitOpsLovers/eslint-config-multistack/commit/383f87cfced8966a3f53efa6c9d45e46a5e696da))
+
 # [1.10.0](https://github.com/GitOpsLovers/eslint-config-multistack/compare/v1.9.0...v1.10.0) (2026-06-15)
 
 

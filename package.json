@@ -1,6 +1,6 @@
 {
   "name": "@gitopslovers/eslint-config-multistack",
-  "version": "1.10.0",
+  "version": "1.11.0",
   "description": "An ESLint plugin that provides opinionated preset configurations for multiple frameworks and libraries.",
   "publishConfig": {
     "access": "public"
