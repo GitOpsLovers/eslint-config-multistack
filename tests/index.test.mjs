@@ -127,15 +127,15 @@ describe('eslint-config-multistack', () => {
     },
   );
 
-  test('config "react" includes testing-library and jest-dom for test files', () => {
+  test('config "react" includes testing-library and jest-dom-ya for test files', () => {
     const cfg = plugin.configs.react();
     const rtlEntry = cfg.find(
-      (entry) => entry.plugins?.['testing-library'] && entry.plugins?.['jest-dom'],
+      (entry) => entry.plugins?.['testing-library'] && entry.plugins?.['jest-dom-ya'],
     );
     expect(rtlEntry).toBeDefined();
     const ruleKeys = Object.keys(rtlEntry.rules);
     expect(ruleKeys.some((key) => key.startsWith('testing-library/'))).toBe(true);
-    expect(ruleKeys.some((key) => key.startsWith('jest-dom/'))).toBe(true);
+    expect(ruleKeys.some((key) => key.startsWith('jest-dom-ya/'))).toBe(true);
   });
 
   test.each(['angular', 'express', 'nestjs'])(

@@ -36,11 +36,11 @@ importers:
         specifier: 4.16.2
         version: 4.16.2(@typescript-eslint/utils@8.59.4(eslint@10.4.0(jiti@2.6.1))(typescript@6.0.3))(eslint-import-resolver-node@0.4.0)(eslint@10.4.0(jiti@2.6.1))
       eslint-plugin-jest:
-        specifier: ^29.15.2
+        specifier: 29.15.2
         version: 29.15.2(@typescript-eslint/eslint-plugin@8.59.3(@typescript-eslint/parser@8.59.3(eslint@10.4.0(jiti@2.6.1))(typescript@6.0.3))(eslint@10.4.0(jiti@2.6.1))(typescript@6.0.3))(eslint@10.4.0(jiti@2.6.1))(typescript@6.0.3)
-      eslint-plugin-jest-dom:
-        specifier: 5.5.0
-        version: 5.5.0(eslint@10.4.0(jiti@2.6.1))
+      eslint-plugin-jest-dom-ya:
+        specifier: 1.0.1
+        version: 1.0.1(eslint@10.4.0(jiti@2.6.1))
       eslint-plugin-jsdoc:
         specifier: 62.9.0
         version: 62.9.0(eslint@10.4.0(jiti@2.6.1))
@@ -1518,12 +1518,12 @@ packages:
       eslint-import-resolver-node:
         optional: true
 
-  eslint-plugin-jest-dom@5.5.0:
-    resolution: {integrity: sha512-CRlXfchTr7EgC3tDI7MGHY6QjdJU5Vv2RPaeeGtkXUHnKZf04kgzMPIJUXt4qKCvYWVVIEo9ut9Oq1vgXAykEA==}
+  eslint-plugin-jest-dom-ya@1.0.1:
+    resolution: {integrity: sha512-ZDUAEBaSYocAZkJnPOJqHpdW0bZstSw2S6o+UzyaERFOgpS6ygDSTiWY37aDA5HJOkkv8L87Zu4QndJA+rnj+A==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0, npm: '>=6', yarn: '>=1'}
     peerDependencies:
       '@testing-library/dom': ^8.0.0 || ^9.0.0 || ^10.0.0
-      eslint: ^6.8.0 || ^7.0.0 || ^8.0.0 || ^9.0.0
+      eslint: ^6.8.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0
     peerDependenciesMeta:
       '@testing-library/dom':
         optional: true
@@ -4783,7 +4783,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-jest-dom@5.5.0(eslint@10.4.0(jiti@2.6.1)):
+  eslint-plugin-jest-dom-ya@1.0.1(eslint@10.4.0(jiti@2.6.1)):
     dependencies:
       '@babel/runtime': 7.29.2
       eslint: 10.4.0(jiti@2.6.1)
