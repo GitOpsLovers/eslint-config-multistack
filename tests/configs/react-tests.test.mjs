@@ -8,17 +8,17 @@ describe('react-tests config', () => {
     expect(config).toHaveLength(1);
   });
 
-  test('registers testing-library and jest-dom plugins scoped to test files', () => {
+  test('registers testing-library and jest-dom-ya plugins scoped to test files', () => {
     const [entry] = config;
     expect(entry.files.some((glob) => glob.includes('test'))).toBe(true);
     expect(entry.plugins['testing-library']).toBeDefined();
-    expect(entry.plugins['jest-dom']).toBeDefined();
+    expect(entry.plugins['jest-dom-ya']).toBeDefined();
   });
 
-  test('applies recommended rules from testing-library and jest-dom', () => {
+  test('applies recommended rules from testing-library and jest-dom-ya', () => {
     const [entry] = config;
     const ruleKeys = Object.keys(entry.rules);
     expect(ruleKeys.some((key) => key.startsWith('testing-library/'))).toBe(true);
-    expect(ruleKeys.some((key) => key.startsWith('jest-dom/'))).toBe(true);
+    expect(ruleKeys.some((key) => key.startsWith('jest-dom-ya/'))).toBe(true);
   });
 });
