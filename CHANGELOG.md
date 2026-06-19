@@ -1,3 +1,10 @@
+# [1.12.0](https://github.com/GitOpsLovers/eslint-config-multistack/compare/v1.11.0...v1.12.0) (2026-06-19)
+
+
+### Features
+
+* add Angular template configuration ([#23](https://github.com/GitOpsLovers/eslint-config-multistack/issues/23)) ([0c4f9c6](https://github.com/GitOpsLovers/eslint-config-multistack/commit/0c4f9c670f31fce16d5f1d993393c5364b9310c2))
+
 # [1.11.0](https://github.com/GitOpsLovers/eslint-config-multistack/compare/v1.10.0...v1.11.0) (2026-06-18)
 
 
