@@ -121,4 +121,20 @@ describe('angular config', () => {
       expect(iEntry.settings['import-x/resolver'].typescript.project).toContain('tsconfig.app.json');
     });
   });
+
+  describe('prettier integration', () => {
+    test('includes prettier config entry that disables conflicting rules', () => {
+        const isOff = (rule) => rule === 'off' || rule === 0;
+        const prettierEntry = config.find((entry) => entry.rules?.semi !== undefined && isOff(entry.rules?.semi));
+        expect(prettierEntry).toBeDefined();
+    });
+
+    test('includes prettier/prettier rule scoped to html files', () => {
+        const prettierHtmlEntry = config.find(
+            (entry) => entry.files?.includes('**/*.html') && entry.rules?.['prettier/prettier'],
+        );
+        expect(prettierHtmlEntry).toBeDefined();
+        expect(prettierHtmlEntry.rules['prettier/prettier'][1].parser).toBe('angular');
+    });
+});
 });
