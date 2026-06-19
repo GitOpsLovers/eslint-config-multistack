@@ -1,3 +1,10 @@
+# [1.13.0](https://github.com/GitOpsLovers/eslint-config-multistack/compare/v1.12.0...v1.13.0) (2026-06-19)
+
+
+### Features
+
+* add Prettier configuration ([#24](https://github.com/GitOpsLovers/eslint-config-multistack/issues/24)) ([4c694c8](https://github.com/GitOpsLovers/eslint-config-multistack/commit/4c694c88e0b9958e6a8bb110ee5baa059b39434f))
+
 # [1.12.0](https://github.com/GitOpsLovers/eslint-config-multistack/compare/v1.11.0...v1.12.0) (2026-06-19)
 
 
