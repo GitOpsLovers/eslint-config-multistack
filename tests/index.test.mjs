@@ -205,6 +205,46 @@ describe('eslint-config-multistack', () => {
     expect(tsEntry.languageOptions.parserOptions).toEqual({ project: ['tsconfig.app.json'] });
   });
 
+  test('angular config includes @angular-eslint plugin', () => {
+    const cfg = plugin.configs.angular();
+    const angularEntry = cfg.find((entry) => entry.plugins?.['@angular-eslint']);
+    expect(angularEntry).toBeDefined();
+  });
+
+  test('angular config includes @angular-eslint/template plugin scoped to .html files', () => {
+    const cfg = plugin.configs.angular();
+    const templateEntry = cfg.find(
+      (entry) => entry.plugins?.['@angular-eslint/template'] && entry.files?.includes('**/*.html'),
+    );
+    expect(templateEntry).toBeDefined();
+  });
+
+  test('angular config includes recommended TypeScript rules', () => {
+    const cfg = plugin.configs.angular();
+    const tsRecommended = cfg.find((entry) => entry.name === 'angular-eslint/ts-recommended');
+    expect(tsRecommended).toBeDefined();
+    expect(tsRecommended.rules['@angular-eslint/contextual-lifecycle']).toBe('error');
+  });
+
+  test('angular config includes recommended template rules for .html files', () => {
+    const cfg = plugin.configs.angular();
+    const templateEntry = cfg.find((entry) => entry.files?.includes('**/*.html'));
+    expect(templateEntry).toBeDefined();
+    expect(templateEntry.rules['@angular-eslint/template/banana-in-box']).toBe('error');
+  });
+
+  test('angular config includes template accessibility rules for .html files', () => {
+    const cfg = plugin.configs.angular();
+    const templateEntry = cfg.find((entry) => entry.files?.includes('**/*.html'));
+    expect(templateEntry.rules['@angular-eslint/template/alt-text']).toBe('error');
+  });
+
+  test('angular config includes inline template processor for .ts files', () => {
+    const cfg = plugin.configs.angular();
+    const processorEntry = cfg.find((entry) => entry.processor && entry.files?.includes('**/*.ts'));
+    expect(processorEntry).toBeDefined();
+  });
+
   test('react({ tsConfig }) passes tsConfig to underlying configs', () => {
     const cfg = plugin.configs.react({ tsConfig: 'tsconfig.custom.json' });
     const tsEntry = cfg.find((entry) => entry.plugins?.['@typescript-eslint']);
