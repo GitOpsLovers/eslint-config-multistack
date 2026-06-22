@@ -15,12 +15,12 @@ describe('eslint-config-multistack', () => {
   });
 
   test('exports flat configs for all presets', () => {
-    const expected = ['angular', 'react', 'express', 'nestjs'];
+    const expected = ['angular', 'react', 'express', 'nestjs', 'ionic'];
     expect(Object.keys(plugin.configs)).toEqual(expect.arrayContaining(expected));
   });
 
   test('keeps flatConfigs alias for backwards compatibility', () => {
-    const expected = ['angular', 'react', 'express', 'nestjs'];
+    const expected = ['angular', 'react', 'express', 'nestjs', 'ionic'];
     expect(Object.keys(plugin.flatConfigs)).toEqual(expect.arrayContaining(expected));
   });
 
@@ -367,5 +367,63 @@ describe('eslint-config-multistack', () => {
     const cfg = plugin.configs.nestjs();
     const presetEntry = cfg.findLast((entry) => entry.languageOptions?.sourceType);
     expect(presetEntry.languageOptions.sourceType).toBe('commonjs');
+  });
+
+  test('ionic config is a function', () => {
+    expect(typeof plugin.configs.ionic).toBe('function');
+  });
+
+  test('ionic() result has name and multistack plugin in first entry', () => {
+    const config = plugin.configs.ionic();
+    expect(config[0].name).toBe('multistack/ionic');
+    expect(config[0].plugins.multistack).toBe(plugin);
+  });
+
+  test('ionic() defaults to React framework with vitest', () => {
+    const config = plugin.configs.ionic();
+    const vitestEntry = config.find((entry) => entry.plugins?.vitest);
+    expect(vitestEntry).toBeDefined();
+    const rtlEntry = config.find((entry) => entry.plugins?.['testing-library']);
+    expect(rtlEntry).toBeDefined();
+  });
+
+  test('ionic({ framework: "angular" }) includes Angular configs', () => {
+    const config = plugin.configs.ionic({ framework: 'angular' });
+    const angularEntry = config.find((entry) => entry.plugins?.['@angular-eslint']);
+    expect(angularEntry).toBeDefined();
+    const templateEntry = config.find((entry) => entry.files?.includes('**/*.html'));
+    expect(templateEntry).toBeDefined();
+  });
+
+  test('ionic({ framework: "react" }) includes React configs', () => {
+    const config = plugin.configs.ionic({ framework: 'react' });
+    const reactEntry = config.find(
+      (entry) => entry.files?.includes('**/*.jsx') || entry.files?.includes('**/*.tsx'),
+    );
+    expect(reactEntry).toBeDefined();
+  });
+
+  test('ionic() with unknown framework throws an error', () => {
+    expect(() => plugin.configs.ionic({ framework: 'vue' })).toThrow(
+      '[eslint-config-multistack] Unknown framework "vue"',
+    );
+  });
+
+  test('ionic() with unknown testRunner throws an error', () => {
+    expect(() => plugin.configs.ionic({ testRunner: 'mocha' })).toThrow(
+      '[eslint-config-multistack] Unknown testRunner "mocha"',
+    );
+  });
+
+  test('ionic({ testRunner: "jest" }) includes jest config', () => {
+    const config = plugin.configs.ionic({ testRunner: 'jest' });
+    const jestEntry = config.find((entry) => entry.plugins?.jest);
+    expect(jestEntry).toBeDefined();
+  });
+
+  test('ionic({ tsConfig }) passes tsConfig to underlying configs', () => {
+    const cfg = plugin.configs.ionic({ tsConfig: 'tsconfig.custom.json' });
+    const tsEntry = cfg.find((entry) => entry.plugins?.['@typescript-eslint']);
+    expect(tsEntry.languageOptions.parserOptions).toEqual({ project: ['tsconfig.custom.json'] });
   });
 });
