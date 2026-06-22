@@ -1,3 +1,15 @@
+# [1.14.0](https://github.com/GitOpsLovers/eslint-config-multistack/compare/v1.13.0...v1.14.0) (2026-06-22)
+
+
+### Bug Fixes
+
+* bug in body imports of NestJS preset ([#27](https://github.com/GitOpsLovers/eslint-config-multistack/issues/27)) ([f127229](https://github.com/GitOpsLovers/eslint-config-multistack/commit/f12722905a5a0519bca373a70ae4d8225067b58c))
+
+
+### Features
+
+* add Ionic preset ([#28](https://github.com/GitOpsLovers/eslint-config-multistack/issues/28)) ([30adb30](https://github.com/GitOpsLovers/eslint-config-multistack/commit/30adb30782685769135e218a4cc25d22fca38abe))
+
 # [1.13.0](https://github.com/GitOpsLovers/eslint-config-multistack/compare/v1.12.0...v1.13.0) (2026-06-19)
 
 
