@@ -12,6 +12,7 @@ Install it, choose a preset, and get a solid default ruleset for JavaScript, Typ
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)
 ![Express.js](https://img.shields.io/badge/Express.js-ffffff?style=for-the-badge&logo=express&logoColor=black)
 ![NestJS](https://img.shields.io/badge/NestJS-E0234E?style=for-the-badge&logo=nestjs&logoColor=white)
+![Ionic](https://img.shields.io/badge/Ionic-3880FF?style=for-the-badge&logo=ionic&logoColor=white)
 
 ## Why use it
 
@@ -60,6 +61,7 @@ These are the presets currently available on the package:
 | `multistack.configs.angular()`          | Angular projects            |
 | `multistack.configs.express()`          | Express and Node backends   |
 | `multistack.configs.nestjs()`           | NestJS backends             |
+| `multistack.configs.ionic(options)`     | Ionic projects              |
 | `multistack.configs.tsLibrary(options)` | TypeScript library projects |
 
 Every preset accepts an optional `options` object with the following keys:
@@ -73,6 +75,13 @@ The `tsLibrary`, `express` and `nestjs` presets also accepts:
 | Option       | Type                 | Default    | Description                 |
 |--------------|----------------------|------------|-----------------------------|
 | `testRunner` | `'vitest' \| 'jest'` | `'vitest'` | Which test framework to use |
+
+The `ionic` preset also accepts:
+
+| Option       | Type                       | Default    | Description                        |
+|--------------|----------------------------|------------|------------------------------------|
+| `testRunner` | `'vitest' \| 'jest'`       | `'vitest'` | Which test framework to use        |
+| `framework`  | `'react' \| 'angular'`     | `'react'`  | Frontend framework used with Ionic |
 
 Example:
 
