@@ -82,11 +82,13 @@ describe('nestjs config', () => {
 
     test('overrides conflicting core rules for TypeScript files', () => {
       expect(typescriptEntry).toBeDefined();
+      expect(typescriptEntry.rules['no-redeclare']).toBe('off');
       expect(typescriptEntry.rules['no-shadow']).toBe('off');
       expect(typescriptEntry.rules['no-undef']).toBe('off');
       expect(typescriptEntry.rules['no-unused-expressions']).toBe('off');
       expect(typescriptEntry.rules['no-unused-vars']).toBe('off');
       expect(typescriptEntry.rules['require-await']).toBe('off');
+      expect(typescriptEntry.rules['@typescript-eslint/no-redeclare']).toBe('error');
       expect(typescriptEntry.rules['@typescript-eslint/no-shadow']).toBe('error');
       expect(typescriptEntry.rules['@typescript-eslint/no-unused-expressions']).toBe('error');
       expect(typescriptEntry.rules['@typescript-eslint/require-await']).toBe('error');
