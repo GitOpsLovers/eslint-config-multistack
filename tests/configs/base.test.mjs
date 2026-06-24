@@ -95,8 +95,8 @@ describe('base config', () => {
     expect(rules['no-nested-ternary']).toBe('error');
   });
 
-  test('enforces curly braces for multi-line blocks', () => {
-    expect(rules['curly']).toEqual(['error', 'multi-line']);
+  test('enforces curly braces for all blocks', () => {
+    expect(rules['curly']).toEqual(['error', 'all']);
   });
 
   test('enforces camelCase naming', () => {

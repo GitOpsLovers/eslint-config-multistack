@@ -28,8 +28,9 @@ describe('angular config', () => {
     expect(preset.rules['no-duplicate-imports']).toBe('error');
   });
 
-  test('enforces prefer-const', () => {
-    expect(preset.rules['prefer-const']).toBe('error');
+  test('enforces prefer-const (from base config)', () => {
+    const baseEntry = config.find((entry) => entry.rules?.['prefer-const']);
+    expect(baseEntry.rules['prefer-const']).toBe('error');
   });
 
   test('includes imports config with import and unused-imports plugins', () => {
