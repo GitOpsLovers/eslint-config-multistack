@@ -173,6 +173,31 @@ describe('ionic config', () => {
       const prettierEntry = config.find((entry) => entry.plugins?.prettier);
       expect(prettierEntry).toBeDefined();
     });
+
+    test('disables prefer-standalone for Ionic modules', () => {
+      expect(preset.rules['@angular-eslint/prefer-standalone']).toBe('off');
+    });
+
+    test('allows Page and Component suffixes for component classes', () => {
+      expect(preset.rules['@angular-eslint/component-class-suffix']).toEqual([
+        'error',
+        { suffixes: ['Page', 'Component'] },
+      ]);
+    });
+
+    test('enforces component selector with app prefix and kebab-case', () => {
+      expect(preset.rules['@angular-eslint/component-selector']).toEqual([
+        'error',
+        { type: 'element', prefix: 'app', style: 'kebab-case' },
+      ]);
+    });
+
+    test('enforces directive selector with app prefix and camelCase', () => {
+      expect(preset.rules['@angular-eslint/directive-selector']).toEqual([
+        'error',
+        { type: 'attribute', prefix: 'app', style: 'camelCase' },
+      ]);
+    });
   });
 
   describe('with testRunner option', () => {
