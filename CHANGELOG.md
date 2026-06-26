@@ -1,3 +1,11 @@
+# [1.15.0](https://github.com/GitOpsLovers/eslint-config-multistack/compare/v1.14.0...v1.15.0) (2026-06-26)
+
+
+### Features
+
+* improve Ionic preset ([#30](https://github.com/GitOpsLovers/eslint-config-multistack/issues/30)) ([82415a0](https://github.com/GitOpsLovers/eslint-config-multistack/commit/82415a0d1ef826c8ff5bc88df17faadaafc10df0))
+* unify some rules ([#31](https://github.com/GitOpsLovers/eslint-config-multistack/issues/31)) ([9adeebf](https://github.com/GitOpsLovers/eslint-config-multistack/commit/9adeebfa8a673b3b25c0aab7c4588d6c309200de))
+
 # [1.14.0](https://github.com/GitOpsLovers/eslint-config-multistack/compare/v1.13.0...v1.14.0) (2026-06-22)
 
 
