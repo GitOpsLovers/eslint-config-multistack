@@ -45,8 +45,8 @@ describe('angular config', () => {
       'node_modules/',
       'dist/',
       'coverage/',
-      '.angular/',
       '.turbo/',
+      '.angular/',
     ]);
   });
 
