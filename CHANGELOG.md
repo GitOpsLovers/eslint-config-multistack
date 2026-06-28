@@ -1,3 +1,10 @@
+# [1.16.0](https://github.com/GitOpsLovers/eslint-config-multistack/compare/v1.15.0...v1.16.0) (2026-06-28)
+
+
+### Features
+
+* unify base configurations ([#33](https://github.com/GitOpsLovers/eslint-config-multistack/issues/33)) ([1005883](https://github.com/GitOpsLovers/eslint-config-multistack/commit/100588349c290547548d3add97e5bda5e0e44c8f))
+
 # [1.15.0](https://github.com/GitOpsLovers/eslint-config-multistack/compare/v1.14.0...v1.15.0) (2026-06-26)
 
 
