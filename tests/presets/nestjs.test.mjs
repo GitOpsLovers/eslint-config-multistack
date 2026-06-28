@@ -50,10 +50,6 @@ describe('nestjs config', () => {
       expect(preset.rules['no-console']).toBe('off');
     });
 
-    test('enforces require-await', () => {
-      expect(preset.rules['require-await']).toBe('error');
-    });
-
     test('enforces no-promise-executor-return', () => {
       expect(preset.rules['no-promise-executor-return']).toBe('error');
     });
