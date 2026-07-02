@@ -1,3 +1,10 @@
+## [1.16.1](https://github.com/GitOpsLovers/eslint-config-multistack/compare/v1.16.0...v1.16.1) (2026-07-02)
+
+
+### Bug Fixes
+
+* angular multispace and multiline errors ([#35](https://github.com/GitOpsLovers/eslint-config-multistack/issues/35)) ([20e2a36](https://github.com/GitOpsLovers/eslint-config-multistack/commit/20e2a36e63ec9e85f492d98f2553d75c754bd8e3))
+
 # [1.16.0](https://github.com/GitOpsLovers/eslint-config-multistack/compare/v1.15.0...v1.16.0) (2026-06-28)
 
 
