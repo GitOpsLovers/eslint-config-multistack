@@ -9,31 +9,27 @@ describe('prettier config', () => {
     expect(Array.isArray(config)).toBe(true);
   });
 
-  test('has two entries', () => {
-    expect(config.length).toBe(2);
+  test('has a single entry', () => {
+    expect(config.length).toBe(1);
   });
 
-describe('first entry — eslint-config-prettier (disables conflicting rules)', () => {
+  describe('html entry — eslint-config-prettier disables + prettier/prettier rule', () => {
     const entry = config[0];
 
-    test('disables semi rule', () => {
-        expect(isOff(entry.rules?.semi)).toBe(true);
-    });
-
-    test('disables quotes rule', () => {
-        expect(isOff(entry.rules?.quotes)).toBe(true);
-    });
-
-    test('disables comma-dangle rule', () => {
-        expect(isOff(entry.rules?.['comma-dangle'])).toBe(true);
-    });
-});
-
-  describe('second entry — prettier/prettier rule for HTML', () => {
-    const entry = config[1];
-
-    test('scopes to html files', () => {
+    test('scopes to html files so JS/TS keep their stylistic rules', () => {
       expect(entry.files).toEqual(['**/*.html']);
+    });
+
+    test('disables semi rule (for html only)', () => {
+      expect(isOff(entry.rules?.semi)).toBe(true);
+    });
+
+    test('disables quotes rule (for html only)', () => {
+      expect(isOff(entry.rules?.quotes)).toBe(true);
+    });
+
+    test('disables comma-dangle rule (for html only)', () => {
+      expect(isOff(entry.rules?.['comma-dangle'])).toBe(true);
     });
 
     test('registers prettier plugin', () => {
