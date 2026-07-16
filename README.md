@@ -70,7 +70,7 @@ Every preset accepts an optional `options` object with the following keys:
 |------------|----------|-------------------|------------------------------------------------|
 | `tsconfig` | `string` | `'tsconfig.json'` | Path to your project's TypeScript config file. |
 
-The `tsLibrary`, `express`, `nestjs` and `ionic` presets also accepts:
+The `tsLibrary`, `express`, `nestjs`, `angular` and `ionic` presets also accepts:
 
 | Option       | Type                 | Default    | Description                 |
 |--------------|----------------------|------------|-----------------------------|
