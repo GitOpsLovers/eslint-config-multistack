@@ -1,3 +1,10 @@
+## [1.16.2](https://github.com/GitOpsLovers/eslint-config-multistack/compare/v1.16.1...v1.16.2) (2026-07-16)
+
+
+### Bug Fixes
+
+* make angular preset test runner configurable ([#36](https://github.com/GitOpsLovers/eslint-config-multistack/issues/36)) ([7a22baa](https://github.com/GitOpsLovers/eslint-config-multistack/commit/7a22baa4d926024fd6639dc1a1e94bdfa5bdfdf4))
+
 ## [1.16.1](https://github.com/GitOpsLovers/eslint-config-multistack/compare/v1.16.0...v1.16.1) (2026-07-02)
 
 
