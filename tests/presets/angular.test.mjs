@@ -109,6 +109,31 @@ describe('angular config', () => {
     });
   });
 
+  describe('testRunner option', () => {
+    test('throws for unknown testRunner', () => {
+      expect(() => createConfig({ testRunner: 'mocha' })).toThrow(
+        '[eslint-config-multistack] Unknown testRunner "mocha"',
+      );
+    });
+
+    test('uses vitest by default', () => {
+      const vitestEntry = config.find((entry) => entry.plugins?.vitest);
+      const jestEntry = config.find((entry) => entry.plugins?.jest);
+      expect(vitestEntry).toBeDefined();
+      expect(vitestEntry.rules['vitest/no-focused-tests']).toBe('error');
+      expect(jestEntry).toBeUndefined();
+    });
+
+    test('uses jest when testRunner is jest', () => {
+      const jestConfig = createConfig({ testRunner: 'jest' });
+      const vitestEntry = jestConfig.find((entry) => entry.plugins?.vitest);
+      const jestEntry = jestConfig.find((entry) => entry.plugins?.jest);
+      expect(jestEntry).toBeDefined();
+      expect(jestEntry.rules['jest/no-focused-tests']).toBe('error');
+      expect(vitestEntry).toBeUndefined();
+    });
+  });
+
   describe('with tsConfig option', () => {
     const customConfig = createConfig({ tsConfig: 'tsconfig.app.json' });
 
